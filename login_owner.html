@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Customer</title>
+    <link rel="stylesheet" href="common1.css">
+    <link rel="stylesheet" href="login_customer.css">
+    <style>
+        .role-selection {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            margin-top: -5px;
+        }
+
+        .role-button{
+        padding: 13px 75px;
+        font-size: 14px;
+        background-color: #a2ccec;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight:bold;
+        transition: background-color 0.3s;
+        }
+
+        a.role-button1{
+            padding-top:12px;
+        }
+
+        .role-button:hover, .role-button1:hover {
+            background-color: #6189e6;
+        }
+
+        h2{
+            color: #193b8a;
+        }
+        
+    </style>
+</head>
+<body>
+    <img src="gambar/background.png" alt="Website Background" class="background-image">
+    <div class="container">
+        <h2>Log In</h2>
+        <div class="login-box">
+            <!-- Logo Website -->
+            <img src="gambar/logo.png" alt="Website Logo" class="logo">
+
+            <!-- Tombol Pilih Role -->
+            <div class="role-selection">
+                <a href="login.html" class="role-button">Admin</a>
+            </div>
+
+            <!-- Form -->
+            <form id="loginForm">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <p>Don't have an account? <a href="sign_up.html">Sign Up</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            if (email !== "" && password !== "") {
+                window.location.href = "homepage_admin.html";
+            } else {
+                alert("Please fill in all fields correctly.");
+            }
+        });
+    </script>
+</body>
+</html>

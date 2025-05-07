@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="common1.css">
+    <link rel="stylesheet" href="signup_customer.css">
+    <style>
+      .role-selection {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            margin-top: -5px;
+        }
+
+        .role-button, .role-button1 {
+        padding: 13px 95px;
+        font-size: 14px;
+        background-color: #a2ccec;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight:bold;
+        transition: background-color 0.3s;
+        }
+
+        .role-button:hover, .role-button1:hover {
+            background-color: #6189e6;
+            text-decoration: none;
+        }
+
+        h2{
+            color: #193b8a;
+            margin-top: 20px;
+        }
+
+        #signupForm{
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <img src="gambar/background.png" alt="Website Logo" class="background-image">
+    <div class="container">
+        <h2>Sign Up</h2>
+        <div class="signup-box">
+            <img src="gambar/logo.png" alt="Website Logo" class="logosignup">
+
+            <div class="role-selection">
+                <a href="sign_up.html" class="role-button1">Admin</a>
+            </div>
+
+            <!-- Form -->
+            <form id="signupForm">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter your username" readonly disabled>
+            
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Enter your email" readonly disabled>
+            
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter your password" readonly disabled>
+            
+                <label>Phone Number</label>
+                <input type="tel" id="phone" placeholder="Enter your phone number" readonly disabled maxlength="13" 
+                    oninput="validatePhoneNumber(this)">
+            
+                <button type="submit">Sign Up</button>
+            </form>
+
+            <p>Already have an account? <a href="login.html">Log In</a></p>
+        </div>
+    </div>
+
+    <script>
+        function validatePhoneNumber(input) {
+            // Hapus karakter non-numeric
+            input.value = input.value.replace(/\D/g, '');
+
+            // Batasi panjang maksimal 13 angka
+            if (input.value.length > 13) {
+                input.value = input.value.slice(0, 13);
+            }
+        }
+
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah form melakukan submit default
+
+            // Validasi input
+            let username = document.getElementById("username").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let phone = document.getElementById("phone").value;
+
+            if (username && email && password && phone.length <= 13) {
+                // Jika semua input valid, arahkan ke halaman login.html
+                window.location.href = "login.html";
+            } else {
+                alert("Please fill in all fields correctly.");
+            }
+        });
+    </script>
+</body>
+</html>

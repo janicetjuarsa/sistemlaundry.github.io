@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin - DripLess</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('background.png');
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1{
+    padding-left: 190px;
+  }
+
+    .container {
+      max-width: 1000px;
+      background-color: #e6f2fb;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      height: 70px;
+    }
+
+    .logo {
+      width: 50px;
+    }
+
+    h1 {
+      color: #2a3d66;
+    }
+
+    .logout {
+      background-color: #a4cbee;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #cde2f7;
+    }
+
+    select {
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .logo {
+    width: 170px;
+    height: 70px;
+  }
+
+    .nav {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .nav a {
+      text-decoration: none;
+      margin: 0 10px;
+      background-color: #a4cbee;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .nav a:hover {
+      background-color: #6189e6;
+    }
+
+    .logout {
+    background-color: #a4cbee;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 5px;
+    font-weight: bold;
+  }
+  
+  .profile-pic{
+    height:50px;
+    width: 50px;
+    margin-left: 150px;
+  }
+
+  a{
+    text-decoration: none;
+    color: white;
+  }
+
+  .logout:hover{
+    background-color: #6189e6;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="gambar/logo.png" alt="DripLess Logo" class="logo">
+      <h1>Dashboard Admin</h1>
+      <div class="header-right">
+        <img src="gambar/icons8-test-account-80.png" alt="Profile Picture" class="profile-pic">
+        </div> <!-- Placeholder for the profile image -->
+        <button class="logout"><a href="index.html">Logout</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID Pesanan</th>
+          <th>Nama</th>
+          <th>Layanan</th>
+          <th>Berat</th>
+          <th>Alamat</th>
+          <th>Waktu Jemput</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DL002345</td>
+          <td>Amanda</td>
+          <td>Cuci + Setrika</td>
+          <td>3 kg</td>
+          <td>Jl. Mawar No. 15</td>
+          <td>08 Mei 2025, 10:00</td>
+          <td>
+            <select>
+              <option>Menunggu Penjemputan</option>
+              <option>Dalam Penjemputan</option>
+              <option>Sedang Diproses</option>
+              <option>Selesai</option>
+            </select>
+          </td>
+        </tr>
+        <!-- Tambahkan baris lainnya dari database -->
+      </tbody>
+    </table>
+
+    <div class="nav">
+      <a href="layanan_admin.html">Layanan</a>
+      <a href="datapelanggan.html">Data Pelanggan</a>
+      <a href="laporan.html">Laporan</a>
+    </div>
+  </div>
+</body>
+</html>

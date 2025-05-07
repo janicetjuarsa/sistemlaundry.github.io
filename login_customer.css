@@ -1,0 +1,21 @@
+/* Kotak utama login */
+.login-box {
+    background-color: #c1d9eb; 
+    padding: 30px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 15px;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+  text-decoration: none;
+}

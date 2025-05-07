@@ -1,0 +1,17 @@
+.signup-box {
+    background-color: #c1d9eb;
+    padding: 30px;
+    width: 300px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.sign-up{
+    color: white;
+}
+
+.logosignup {
+    width: 80%;
+    height: 80%;
+    margin-bottom: 15px;
+}
