@@ -28,10 +28,15 @@ $orders = $stmt->get_result();
 
 // Ambil user dan order terbaru
 $latest_order = $orders->fetch_assoc(); // baris pertama = order terbaru
-$user = ['username' => $latest_order['username']]; // ambil username
 
-// Debugging: cek apakah $latest_order ada datanya
-// var_dump($latest_order); 
+// Ambil username dari tabel users berdasarkan session
+$user_stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
+$user_stmt->bind_param("i", $user_id);
+$user_stmt->execute();
+$user_result = $user_stmt->get_result();
+$user_data = $user_result->fetch_assoc();
+
+$user = ['username' => $user_data ? $user_data['username'] : 'User'];
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -52,22 +57,27 @@ $user = ['username' => $latest_order['username']]; // ambil username
     </header>
 
     <section class="status-section">
-      <div class="card">
-        <h2>Status Saat Ini</h2>
-        <!-- Menampilkan status pesanan terbaru sesuai user -->
-        <p><?= $latest_order ? htmlspecialchars($latest_order['status']) : 'Tidak ada pesanan' ?></p>
-      </div>
-      <div class="card">
-        <h2>Estimasi Selesai</h2>
-        <!-- Menampilkan estimasi selesai pesanan terbaru sesuai user -->
-        <p><?= $latest_order && $latest_order['waktu_penjemputan'] ? date('d M Y H:i', strtotime($latest_order['waktu_penjemputan'])) : 'Belum ada estimasi' ?></p>
-      </div>
-      <div class="card">
-        <h2>Layanan</h2>
-        <!-- Menampilkan layanan pesanan terbaru sesuai user -->
-        <p><?= $latest_order ? htmlspecialchars($latest_order['jenis_layanan']) : 'Tidak ada layanan' ?></p>
+    <div class="card">
+      <h2>Status Saat Ini</h2>
+      <!-- Menampilkan status pesanan untuk semua pesanan yang dimiliki user -->
+      <?php if ($orders->num_rows > 0): ?>
+        <ul>
+          <?php
+          // Reset pointer ke awal data dan loop untuk menampilkan status
+          mysqli_data_seek($orders, 0);
+          while ($row = $orders->fetch_assoc()):
+          ?>
+            <li>
+              <strong>Status Layanan <?= $row['layanan'] ?>:</strong> <?= htmlspecialchars($row['status']) ?>
+            </li>
+          <?php endwhile; ?>
+        </ul>
+      <?php else: ?>
+        <p>Tidak ada pesanan.</p>
+      <?php endif; ?>
       </div>
     </section>
+
 
     <section class="order-section">
       <h2>Detail Pemesanan</h2>
@@ -92,7 +102,7 @@ $user = ['username' => $latest_order['username']]; // ambil username
               <td><?= htmlspecialchars($row['jenis_layanan']) ?></td>
               <td><?= htmlspecialchars($row['berat']) ?></td>
               <td>Rp<?= number_format($row['total_harga'], 0, ',', '.') ?></td>
-              <td><?= htmlspecialchars($row['status']) ?></td>
+              <td><a href="tracking.php?id=<?= $row['id'] ?>" style="color:black"><?= htmlspecialchars($row['status']) ?></a></td>
             </tr>
           <?php endwhile; else: ?>
             <tr>

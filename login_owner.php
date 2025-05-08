@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
-                header("Location: homepage_admin.html");
+                header("Location: homepage_admin.php");
                 exit();
             } else {
                 echo "Incorrect password.";

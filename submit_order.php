@@ -20,9 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $berat = $_POST['berat'];
     $lokasi = $_POST['lokasi'];
     $waktu = $_POST['waktu'];
+    $status = "Menunggu Penjemputan";
 
-    $stmt = $conn->prepare("INSERT INTO orders (user_id, layanan, berat, lokasi, waktu_penjemputan) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("isdss", $user_id, $layanan, $berat, $lokasi, $waktu);
+    $stmt = $conn->prepare("INSERT INTO orders (user_id, layanan, berat, lokasi, status, waktu_penjemputan) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("isdsss", $user_id, $layanan, $berat, $lokasi, $status, $waktu);
 
     if ($stmt->execute()) {
         echo json_encode(['success' => true]);
