@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 echo "success";
                 exit();
             } else {
-                echo "";
+                echo "Terjadi kesalahan saat menyimpan data.";
             }
 
             $insert->close();

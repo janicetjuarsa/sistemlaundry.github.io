@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 session_start();
 $conn = new mysqli("localhost", "root", "", "laundry");
 
@@ -23,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
-                header("Location: homepage.html");
+                header("Location: homepage.php");
                 exit();
             } else {
                 echo "Incorrect password.";
