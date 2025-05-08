@@ -57,16 +57,16 @@
             <!-- Form -->
             <form id="signupForm">
                 <label>Username</label>
-                <input type="text" id="username" placeholder="Enter your username" readonly disabled>
+                <input type="text" id="username" placeholder="Enter your username" required>
             
                 <label>Email</label>
-                <input type="email" id="email" placeholder="Enter your email" readonly disabled>
+                <input type="email" id="email" placeholder="Enter your email" required>
             
                 <label>Password</label>
-                <input type="password" id="password" placeholder="Enter your password" readonly disabled>
+                <input type="password" id="password" placeholder="Enter your password" required>
             
                 <label>Phone Number</label>
-                <input type="tel" id="phone" placeholder="Enter your phone number" readonly disabled maxlength="13" 
+                <input type="tel" id="phone" placeholder="Enter your phone number" required maxlength="13" 
                     oninput="validatePhoneNumber(this)">
             
                 <button type="submit">Sign Up</button>
@@ -88,21 +88,41 @@
         }
 
         document.getElementById("signupForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Mencegah form melakukan submit default
-
-            // Validasi input
+            event.preventDefault();
+        
             let username = document.getElementById("username").value;
             let email = document.getElementById("email").value;
             let password = document.getElementById("password").value;
             let phone = document.getElementById("phone").value;
-
+        
             if (username && email && password && phone.length <= 13) {
-                // Jika semua input valid, arahkan ke halaman login.html
-                window.location.href = "login.html";
+                // Kirim data ke server
+                fetch("signup_customer.php", {
+                    method: "POST",
+                    body: new URLSearchParams({
+                        username: username,
+                        email: email,
+                        password: password,
+                        phone: phone
+                    }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === "success") {
+                        window.location.href = "login.html";
+                    } else {
+                        alert("Error during signup: " + data);
+                    }
+                })
+                .catch(error => alert("An error occurred: " + error));
             } else {
                 alert("Please fill in all fields correctly.");
             }
         });
+        
     </script>
 </body>
 </html>
