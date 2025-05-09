@@ -25,16 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addLayanan'])) {
 }
 
 // Menangani pengeditan data
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editId'])) {
-    $id = $_POST['editId'];
-    $jenis_layanan = $_POST['editNama'];
-    $harga_per_kg = $_POST['editHarga'];
+if (
+  $_SERVER['REQUEST_METHOD'] == 'POST' &&
+  isset($_POST['editId'], $_POST['editNama'], $_POST['editHarga'])
+) {
+  $id = $_POST['editId'];
+  $jenis_layanan = $_POST['editNama'];
+  $harga_per_kg = $_POST['editHarga'];
 
-    if (!empty($jenis_layanan) && !empty($harga_per_kg)) {
-        $query = "UPDATE layanan SET jenis_layanan = '$jenis_layanan', harga_per_kg = '$harga_per_kg' WHERE id = $id";
-        mysqli_query($conn, $query);
-    }
+  if (!empty($jenis_layanan) && !empty($harga_per_kg)) {
+      $query = "UPDATE layanan SET jenis_layanan = '$jenis_layanan', harga_per_kg = '$harga_per_kg' WHERE id = $id";
+      mysqli_query($conn, $query);
+  }
 }
+
 
 // Menangani penghapusan data
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteId'])) {
@@ -247,10 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteId'])) {
           echo "<td class='nama'>" . $row['jenis_layanan'] . "</td>";
           echo "<td class='harga'>" . $row['harga_per_kg'] . "</td>";
           echo "<td>
-                  <form method='post' style='display:inline;'>
-                    <input type='hidden' name='editId' value='" . $row['id'] . "'>
-                    <button class='action-btn edit-btn'>Edit</button>
-                  </form>
+                  <button type=\"button\" class=\"action-btn edit-btn\" onclick=\"openModal(this)\">Edit</button>
                   <form method='post' style='display:inline;'>
                     <input type='hidden' name='deleteId' value='" . $row['id'] . "'>
                     <button class='action-btn delete-btn'>Hapus</button>
